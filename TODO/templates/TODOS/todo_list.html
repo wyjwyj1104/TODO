@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>TODO List</h1>
+  {% if todo_list %}
+  <ul>
+    {% for todo in todo_list %}
+      <li>
+        <a href="{{ todo.get_absolute_url }}">{{ todo.description }}</a> [{{todo.state}}] ({{todo.due_date}}) <a href="{% url 'todos_update' todo.id %}">update</a> <a href="{% url 'todos_delete' todo.id %}">delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no todos.</p>
+  {% endif %}
+  <a href="{% url 'todos_create' %}">create</a>
+
+{% endblock %}
